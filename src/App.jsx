@@ -1,7 +1,9 @@
 import "./App.css";
+import About from "./components/About";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
       showAlert("Light mode is enabled", "success");
     }
   };
+
   return (
     <>
       <Navbar
@@ -43,6 +46,22 @@ function App() {
       <div className="container my-3">
         <TextForm showAlert={showAlert} heading="Enter the text to analyze" />
       </div>
+
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <TextForm
+                showAlert={showAlert}
+                heading="Enter the text to analyze"
+              />
+            }
+          >
+            <Route path="/about" element={<About />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
